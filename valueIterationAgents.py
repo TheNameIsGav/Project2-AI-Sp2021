@@ -62,6 +62,8 @@ class ValueIterationAgent(ValueEstimationAgent):
     def runValueIteration(self):
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
+        #I am assuming in here that self.values gets updated at some point
+        #self.computeActionFromValues(self.mdp.getStartState())
 
 
     def getValue(self, state):
@@ -77,7 +79,16 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        value = 0
+
+        statesAndProbabilities = self.mdp.getTransitionStatesAndProbs(state, action) #Gets next states and their probabilities
+        
+        for (newState, prob) in statesAndProbabilities:
+            value += prob*(self.mdp.getReward(state, action, newState) + self.discount*self.values[state]) #adds the values of a state's reward, and the discount for moving there
+
+        return value
+        
+        #util.raiseNotDefined()
 
     def computeActionFromValues(self, state):
         """
@@ -89,7 +100,20 @@ class ValueIterationAgent(ValueEstimationAgent):
           terminal state, you should return None.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        if self.mdp.isTerminal(state): # if we're at terminal state
+          return None
+
+        bestAction = None #set actions and values 
+        bestValue = 0
+
+        actions = self.mdp.getPossibleActions(state) #get all the possible actions we can go
+        for action in actions: 
+            qValue = self.computeQValueFromValues(state,action) #gets the q value of an action
+            if bestValue == 0 or bestValue < qValue: #if our q value is better than our best value (or best value hasnt been hit yet)
+                bestValue = qValue
+                bestAction = action
+        return bestAction #return the best action to take
 
     def getPolicy(self, state):
         return self.computeActionFromValues(state)
