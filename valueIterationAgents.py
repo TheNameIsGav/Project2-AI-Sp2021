@@ -78,7 +78,6 @@ class ValueIterationAgent(ValueEstimationAgent):
           Compute the Q-value of action in state from the
           value function stored in self.values.
         """
-        "*** YOUR CODE HERE ***"
         value = 0
 
         statesAndProbabilities = self.mdp.getTransitionStatesAndProbs(state, action) #Gets next states and their probabilities
@@ -99,7 +98,6 @@ class ValueIterationAgent(ValueEstimationAgent):
           there are no legal actions, which is the case at the
           terminal state, you should return None.
         """
-        "*** YOUR CODE HERE ***"
 
         if self.mdp.isTerminal(state): # if we're at terminal state
           return None
