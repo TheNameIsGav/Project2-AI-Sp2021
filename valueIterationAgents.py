@@ -51,13 +51,8 @@ class ValueIterationAgent(ValueEstimationAgent):
 
     def runValueIteration(self):
         # Write value iteration code here
-        "*** YOUR CODE HERE ***"
         #I am assuming in here that self.values gets updated at some point
         #for state in self.mdp.getStates():
-        #    action = self.computeActionFromValues(state)
-        #    iterations -= 1
-        #    values += getValue(state)
-        #return self
 
         for _ in range(self.iterations): #go through every iteration
             values = util.Counter()
@@ -72,9 +67,7 @@ class ValueIterationAgent(ValueEstimationAgent):
             self.values = values #assign
 
     def getValue(self, state):
-        """
-          Return the value of the state (computed in __init__).
-        """
+        """ Return the value of the state (computed in __init__). """
         return self.values[state]
 
 
@@ -84,14 +77,10 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         value = 0
-
         statesAndProbabilities = self.mdp.getTransitionStatesAndProbs(state, action) #Gets next states and their probabilities
-        
         for newState, prob in statesAndProbabilities:
             value += prob * (self.mdp.getReward(state, action, newState) + self.discount*self.values[newState]) #adds the values of a state's reward, and the discount for moving there
-
         return value
-        
         #util.raiseNotDefined()
 
     def computeActionFromValues(self, state):
@@ -103,7 +92,6 @@ class ValueIterationAgent(ValueEstimationAgent):
           there are no legal actions, which is the case at the
           terminal state, you should return None.
         """
-
         return self.actions[state]
 
     def getPolicy(self, state):
