@@ -63,8 +63,12 @@ class ValueIterationAgent(ValueEstimationAgent):
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
         #I am assuming in here that self.values gets updated at some point
-        #self.computeActionFromValues(self.mdp.getStartState())
-
+        self.computeActionFromValues(self.mdp.getStartState())
+        for state in self.mdp.getStates():
+            action = self.computeActionFromValues(state)
+            iterations -= 1
+            values += getValue(self, action)
+        return self
 
     def getValue(self, state):
         """
