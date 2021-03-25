@@ -104,6 +104,7 @@ class ValueIterationAgent(ValueEstimationAgent):
     def getQValue(self, state, action):
         return self.computeQValueFromValues(state, action)
 
+#Le was here
 
 class AsynchronousValueIterationAgent(ValueIterationAgent):
     """
